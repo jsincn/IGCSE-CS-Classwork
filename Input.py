@@ -1,4 +1,3 @@
-func = input('Mark or Age calculator? ')
 
 def mark():
     totl = int(input('Enter the total amount of marks: '))
@@ -24,42 +23,50 @@ def mark():
     print("Your have approximately " + perc + "%")
 
 def age ():
-    age = int(input("What is your age? "))
-    dob = int(input("What day where you born on? "))
-    mob = int(input("What month where you born in? "))
+    try:
+        age = int(input("What is your age? "))
+        dob = int(input("What day where you born on? "))
+        mob = int(input("What month where you born in? "))
 
-    if(age > 110):
-        print ("You entered false data!")
-        exit()
+        if(age > 110):
+            print ("You entered false data!")
+            exit()
 
-    if(age < 0):
-        print ("You entered false data!")
-        exit()
+        if(age < 0):
+            print ("You entered false data!")
+            exit()
 
-    if(dob > 31):
-        print ("You entered false data!")
-        exit()
+        if(dob > 31):
+            print ("You entered false data!")
+            exit()
 
-    if(dob < 1):
-        print ("You entered false data!")
-        exit()
+        if(dob < 1):
+            print ("You entered false data!")
+            exit()
 
-    if(mob > 12):
-        print ("You entered false data!")
-        exit()
+        if(mob > 12):
+            print ("You entered false data!")
+            exit()
 
-    if(mob < 1):
-        print ("You entered false data!")
-        exit()
+        if(mob < 1):
+            print ("You entered false data!")
+            exit()
 
-    day_age = ((12-mob)*31) + (age*365) - (31-dob)
-    print ("Your age in days is approxiamtely: " + str(day_age))
-    print ("Your age in hours is approxiamtely: " + str(day_age*24))
+        day_age = ((12-mob)*31) + (age*365) - (31-dob)
+        print ("Your age in days is approxiamtely: " + str(day_age))
+        print ("Your age in hours is approxiamtely: " + str(day_age*24))
+    except:
+        print('You did not enter an integer: Reseting')
 
 
+x = 1
 
+while x == 1:
+    func = input('Mark or Age calculator? ')
 
-if(func == "mark"):
-    mark()
-else:
-    age()
+    if(func == "mark"):
+        mark()
+    elif(func == "age"):
+        age()
+    else:
+        print('Invalid Input')
