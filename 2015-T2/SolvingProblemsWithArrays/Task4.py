@@ -1,11 +1,20 @@
+from tkinter import *
+
+
+win = Tk()
 count = 0
 sn = []
 sm1 = []
 sm2 = []
 st = []
 sa =[]
+noST = 2
 
-while count < 10:
+while count < noST:
+    e = Entry(win)
+    e.pack()
+    e.insert(0, "Student Name")
+
     name = input("Student Name ")
     marks = int(input(name + "'s First Test Marks "))
     marks2 = int(input(name + "'s Second Test Marks "))
@@ -27,8 +36,10 @@ while count < 10:
 
 count = 0
 
-while count < 10:
+while count < noST:
     print()
     print(sn[count] + " : " + str(sm1[count]) + " : " + str(sm2[count]) + " : " + str(st[count]) + " : " + str(sa[count]))
     print()
     count += 1
+
+tk.mainloop()
