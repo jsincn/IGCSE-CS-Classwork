@@ -106,3 +106,117 @@ def main():
     
 #run program
 main()
+
+#begin Pseudocode
+"""
+BEGIN bagCheck(id_letter, weight)
+  CASE id_letter OF
+    "S": IF weight > 50.1 OR weight < 49.9
+           THEN PRINT "OUT OF SPEC WEIGHT!"; RETURN "rejected"
+           ELSE PRINT id_letter, weight; RETURN "accepted"
+         ENDIF
+    "G": IF weight > 50.1 OR weight < 49.9
+           THEN PRINT "OUT OF SPEC WEIGHT!"; RETURN "rejected"
+           ELSE PRINT id_letter, weight; RETURN "accepted"
+         ENDIF
+    "C": IF weight > 25.1 OR weight < 24.9
+           THEN PRINT "OUT OF SPEC WEIGHT!"; RETURN "rejected"
+           ELSE PRINT id_letter, weight; RETURN "accepted"
+         ENDIF
+    OTHERWISE PRINT "Unrecognised ID Letter"; RETURN "rejected"     
+  ENDCASE
+END
+
+BEGIN calcPrice(no_gravel,no_sand,no_cement)
+    dicount_packs <- 0
+    remainder_gravel <- no_gravel % 2
+    remainder_sand <- no_sand % 2
+    remainder_cement <- no_cement % 1
+        
+    gravel_div_2 <- no_gravel - remainder_gravel
+    sand_div_2 <- no_sand - remainder_gravel
+    cement_div_1 <- no_gravel - remainder_gravel
+    
+    sand_div_2 <- sand_div_2 / 2
+    gravel_div_2 <- gravel_div_2 / 2
+    
+    IF sand_div_2 <= gravel_div_2
+        THEN IF sand_div_2 <= cement_div_1
+             discount_packs <- sand_div_2
+            ELSE IF cement_div_1 <= sand_div_2
+            discount_packs <- cement_div_1
+            ENDIF
+    ELSE IF cement_div_1 <= gravel_div_2
+        THEN IF sand_div_2 <= cement_div_1
+            discount_packs <- sand_div_2
+        ELSE IF cement_div_1 <= sand_div_2
+            discount_packs <- cement_div_1
+            ENDIF
+    ELSE
+        discount_packs <- gravel_div_2
+    
+    #calculates the extra bags of sand leftover from the discount packs
+    extra_sand <- no_sand - (discount_packs * 2)
+    extra_cement <- no_cement - (discount_packs * 1)
+    extra_gravel <- no_gravel - (discount_packs * 2)
+    
+    original_price <- (no_sand * 2) + (no_cement * 3) + (no_gravel * 2)
+    
+    new_price <- (discount_packs * 10) + (extra_sand * 2) + (extra_gravel * 2) + (extra_cement * 3)
+    
+    PRINT "Subtotal (No discount): ", original_price
+    PRINT "Total (With discount): ", new_price
+END
+
+totalWeight <- 0 #initialize the total Weight for the order
+totalRejects <- 0 #initialize the total number of rejected entries for the order
+
+PRINT "Input number of gravel sacks (Positiv Integer): "
+INPUT no_gravel
+PRINT "Input number of sand sacks (Positiv Integer): "
+INPUT no_sand
+PRINT "Input number of cement sacks (Positiv Integer): "
+INPUT no_cement
+
+i <- 1
+FOR i <- 1 TO no_sand
+    check <- "rejected"
+    WHILE check = "rejected"
+        PRINT "Enter weight of bag of sand: "
+        INPUT weight
+        check <- bagCheck("S", weight)
+        IF check = "rejected"
+            THEN totalRejects <- totalReject + 1
+    ENDWHILE        
+    totalWeight <- totalWeight + weight
+NEXT i
+        
+FOR i <- 1 TO no_gravel
+    check <- "rejected"
+    WHILE check = "rejected"
+        PRINT "Enter weight of bag of gravel: "
+        INPUT weight
+        check <- bagCheck("G", weight)
+        IF check = "rejected":
+            THEN totalRejects <- totalReject + 1
+    ENDWHILE
+    totalWeight <- totalWeight + weight
+NEXT i
+
+FOR i <- 1 TO no_cement
+    check <- "rejected"
+    WHILE check = "rejected"
+        PRINT "Enter weight of bag of cement: "
+        INPUT weight
+        check <- bagCheck("C", weight)
+        if check = "rejected":
+            THEN totalRejects <- totalReject + 1
+    ENDWHILE
+    totalWeight <- totalWeight + weight
+NEXT i
+    
+PRINT "Total Weight of this order: ", totalWeight
+PRINT "Total rejected bags of this order: ", totalRejects
+    
+calcPrice(no_gravel,no_sand,no_cement)
+"""
